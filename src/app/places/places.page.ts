@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from './places.service';
-import { Place } from './places.model';
+import { Place } from '../models/places.model';
 
 
 @Component({
@@ -10,16 +10,13 @@ import { Place } from './places.model';
 })
 export class PlacesPage implements OnInit {
   private uploadJson: Array<Place>;
-  private csvFile;
+
 
 
   constructor(private placeService: PlacesService) {}
 
   ngOnInit() {
-  this.uploadJson = this.placeService.getPlaces();
-
-
-  this.placeService.readFile();
+  this.placeService.getPlacesCSV();
 
 
 }
