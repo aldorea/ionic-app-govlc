@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PlacesPage } from './places.page';
 import { PlacesRoutingModule } from './places-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -11,7 +12,8 @@ import { PlacesRoutingModule } from './places-routing.module';
   imports: [
     CommonModule,
     IonicModule,
-    PlacesRoutingModule
+    PlacesRoutingModule,
+    HttpClientModule
   ],
   declarations: [PlacesPage]
 })
