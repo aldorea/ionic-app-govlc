@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Place } from "../models/places.model";
 import * as data from "../../assets/monumentos-turisticos.json";
-import * as Papa from "papaparse";
 
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -10,7 +9,7 @@ import { Vias } from "../models/vias.model";
 import { TouchSequence } from "selenium-webdriver";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class PlacesService {
   private place: Place;
@@ -25,11 +24,11 @@ export class PlacesService {
   getPlacesJSON(): Array<Place> {
     data.features.forEach(monument => {
       this.place = new Place(
-        parseInt(monument.properties.codvia, 10),
+        monument.properties.codvia,
         monument.properties.nombre,
-        monument.properties.numpol,
-        monument.properties.telefono,
-        monument.properties.idnotes,
+        parseInt(monument.properties.numpol, 10),
+        parseInt(monument.properties.telefono, 10),
+        parseInt(monument.properties.idnotes, 10),
       );
 
       this._place.push(this.place);
@@ -38,16 +37,16 @@ export class PlacesService {
   }
 
   getPlacesCSV() {
-    let contentCSV = "";
+    let contentCSV = '';
     let csvData = [];
     this._http
-      .get("../../assets/vias.csv", { responseType: "text" as "json" })
+      .get('../../assets/vias.csv', { responseType: 'text' })
       .subscribe(
-        result => {
+       result => {
           contentCSV = result;
-          csvData = contentCSV.split("\n");
+          csvData = contentCSV.split('\n');
           csvData.forEach(el => {
-            const delimiter = el.split(";");
+            const delimiter = el.split(';');
             const via = new Vias(
               delimiter[0],
               delimiter[1],
@@ -62,16 +61,18 @@ export class PlacesService {
           console.log(error);
         }
       );
-
+    //console.log(this.viasData)
     this._place.forEach(place => {
-      place.via(this.matchIds(place.idVia()))
-      console.log(place);
+     place.setVia(this.matchIds(place.getIdVia()));
     });
+
+    console.log(this._place);
   }
 
   matchIds(valueId: string): Vias {
     let value: Vias;
     this.viasData.forEach(via => {
+      console.log(via)
       if (via.getCodVia() === valueId) {
         value = via;
         console.log(value);
