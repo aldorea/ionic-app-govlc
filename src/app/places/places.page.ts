@@ -16,7 +16,8 @@ export class PlacesPage implements OnInit {
   constructor(private placeService: PlacesService) {}
 
   ngOnInit() {
-  this.placeService.getPlacesCSV();
+   this.placeService.getPlacesCSV();
+ 
 
 
 }
