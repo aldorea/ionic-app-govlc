@@ -9,7 +9,7 @@ import { Vias } from "../models/vias.model";
 import { TouchSequence } from "selenium-webdriver";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class PlacesService {
   private place: Place;
@@ -28,7 +28,7 @@ export class PlacesService {
         monument.properties.nombre,
         parseInt(monument.properties.numpol, 10),
         parseInt(monument.properties.telefono, 10),
-        parseInt(monument.properties.idnotes, 10),
+        parseInt(monument.properties.idnotes, 10)
       );
 
       this._place.push(this.place);
@@ -37,45 +37,40 @@ export class PlacesService {
   }
 
   getPlacesCSV() {
-    let contentCSV = '';
+    let contentCSV = "";
     let csvData = [];
-    this._http
-      .get('../../assets/vias.csv', { responseType: 'text' })
-      .subscribe(
-       result => {
-          contentCSV = result;
-          csvData = contentCSV.split('\n');
-          csvData.forEach(el => {
-            const delimiter = el.split(';');
-            const via = new Vias(
-              delimiter[0],
-              delimiter[1],
-              delimiter[2],
-              delimiter[3],
-              delimiter[4]
-            );
-            this.viasData.push(via);
-          });
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    //console.log(this.viasData)
-    this._place.forEach(place => {
-     place.setVia(this.matchIds(place.getIdVia()));
-    });
+    this._http.get("../../assets/vias.csv", { responseType: "text" }).subscribe(
+      result => {
+        contentCSV = result;
+        csvData = contentCSV.split("\n");
+        csvData.forEach(el => {
+          const delimiter = el.split(";");
+          const via = new Vias(
+            delimiter[0],
+            delimiter[1],
+            delimiter[2],
+            delimiter[3],
+            delimiter[4]
+          );
+          this.viasData.push(via);
+        });
 
+        this._place.forEach(place => {
+          place.setVia(this.matchIds(place.getIdVia()));
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
     console.log(this._place);
   }
 
   matchIds(valueId: string): Vias {
     let value: Vias;
     this.viasData.forEach(via => {
-      console.log(via)
       if (via.getCodVia() === valueId) {
         value = via;
-        console.log(value);
       }
     });
     return value;
