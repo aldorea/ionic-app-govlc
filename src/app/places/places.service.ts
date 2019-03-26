@@ -33,37 +33,60 @@ export class PlacesService {
       return this._place;
     }
 
-    getPlacesCSV(): Array<Vias> {
-    this._http
-      .get('../../assets/vias.csv', { responseType: 'text' as 'json' })
-      .subscribe(
-        result => {
-          // console.log(result);
-          Papa.parse(result, {
-            delimiter: ';',
-            header: true,
-            encoding: 'UTF-8',
-            step: (results, parser) => {
-              //console.log(results);
-              this.via = new Vias (
-                results.data[0].codtipovia,
-                parseInt( results.data[0].codvia, 10),
-                parseInt(results.data[0].codviacatastro, 10),
-                results.data[0].nomoficial,
-                results.data[0].traducnooficial);
-              this.viasData.push(this.via);
-            }
-          });
+    // getPlacesCSV(): Array<Vias> {
+    // this._http
+    //   .get('../../assets/vias.csv', { responseType: 'text' as 'json' })
+    //   .subscribe(
+    //     result => {
+    //       // console.log(result);
+    //       Papa.parse(result, {
+    //         delimiter: ';',
+    //         header: true,
+    //         encoding: 'UTF-8',
+    //         step: (results, parser) => {
+    //           //console.log(results);
+    //           this.via = new Vias (
+    //             results.data[0].codtipovia,
+    //             parseInt( results.data[0].codvia, 10),
+    //             parseInt(results.data[0].codviacatastro, 10),
+    //             results.data[0].nomoficial,
+    //             results.data[0].traducnooficial);
+    //           this.viasData.push(this.via);
+    //         }
+    //       });
 
-        },
-        error => {
-          console.log(error);
-        }
-      );
-      console.log(this.viasData);
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
+    //   console.log(this.viasData);
       
-      return this.viasData;
-    }
+    //   return this.viasData;
+    // }
+      
+  getPlacesCSV() {
+    let contentCSV = '';
+    let csvData = [];
+      this._http.get('../../assets/vias.csv', { responseType: 'text' as 'json' })
+       .subscribe(
+         result => {
+          console.log(result);
+          contentCSV = result;
+          csvData = contentCSV.split('\n');
+          csvData.forEach(via => {
+            const delimiter = via.split(';');
+            
+          })
+                    
+
+         },
+         error => {
+           console.log(error);
+         }
+       );
+  }
+
 
     matchIds(valueId: number): Vias {
     let value: Vias;
@@ -78,7 +101,7 @@ export class PlacesService {
    matchInfo() {
      // this.getPlacesCSV();
      this.getPlacesJSON().forEach(place => {
-       place.setIdVia(this.matchIds(place.getIdVia()))
+       place.setVia(this.matchIds(place.getIdVia()))
      })
    }
 
