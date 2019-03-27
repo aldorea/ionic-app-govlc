@@ -34,7 +34,9 @@ const routes: Routes = [
     path: '',
     redirectTo: '/places/tabs/monuments',
     pathMatch: 'full'
-  }
+  },  { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesPageModule' },
+  { path: 'map', loadChildren: './map/map.module#MapPageModule' }
+
 ];
 
 @NgModule({

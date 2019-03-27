@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlacesService } from '../places.service';
+import { PlacesService } from '../shared/places.service';
 import { Place } from 'src/app/models/places.model';
 import {  Router } from '@angular/router';
 
@@ -20,6 +20,6 @@ export class MonumentsPage implements OnInit {
   }
 
   showDetail(item: Place) {
-    this._router.navigate(['/tabs/monuments/', item.getVia()]);
+    this._router.navigate(['/tabs/monuments/', JSON.stringify(item)]);
   }
 }

@@ -30,6 +30,7 @@
     "ngx-papaparse": "^3.0.2",
     "papaparse": "^4.6.3",
     "rxjs": "~6.3.3",
+    "utm": "^1.1.1",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {

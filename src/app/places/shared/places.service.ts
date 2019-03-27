@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Place } from "../models/places.model";
-import * as data from "../../assets/monumentos-turisticos.json";
+import { Place } from "../../models/places.model";
+import * as data from "../../../assets/monumentos-turisticos.json";
 
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { Vias } from "../models/vias.model";
+import { Vias } from "../../models/vias.model";
 import { TouchSequence } from "selenium-webdriver";
 
 @Injectable({
@@ -21,14 +21,20 @@ export class PlacesService {
     this.getPlacesJSON();
   }
 
+
+
   getPlacesJSON(): Array<Place> {
     data.features.forEach(monument => {
       this.place = new Place(
         monument.properties.codvia,
         monument.properties.nombre,
         parseInt(monument.properties.numpol, 10),
+        monument.geometry.coordinates[0],
+        monument.geometry.coordinates[1],
         parseInt(monument.properties.telefono, 10),
-        parseInt(monument.properties.idnotes, 10)
+        parseInt(monument.properties.idnotes, 10),
+       
+
       );
 
       this._place.push(this.place);

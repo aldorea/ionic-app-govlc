@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PlacesService } from '../../shared/places.service';
+
 
 @Component({
   selector: 'app-monument-detail',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MonumentDetailPage implements OnInit {
 
-  constructor() { }
+  private visitado: boolean;
+  constructor(private placeService: PlacesService) {
+    this.visitado = false;
+  }
 
   ngOnInit() {
   }
+
+
+  // mirar como funciona con params
+  // setVisitado(visit: boolean) {
+  // }
 
 }

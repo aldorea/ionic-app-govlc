@@ -5,7 +5,9 @@
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let place of _monumentsList" (click)="showDetail(place)">
+    <ion-item *ngFor="let place of _monumentsList" 
+    [routerLink]="['/', 'places', 'tabs','monuments','via']"
+    detail>
       <ion-label>
         {{place._nombre}}
       </ion-label>

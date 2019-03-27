@@ -1,4 +1,4 @@
-import { Vias } from './vias.model';
+import { Vias } from "./vias.model";
 
 export class Place {
   private _idVia: string;
@@ -8,11 +8,15 @@ export class Place {
   private _idNotes: number;
   private _visitado: boolean;
   private _via: Vias;
+  private _latitude: number;
+  private _longitude: number;
 
   constructor(
     idVia: string,
     nombre: string,
     numPortal: number,
+    latitude?: number,
+    longitude?: number,
     telefono?: number,
     idNotes?: number,
     visitado?: boolean,
@@ -25,6 +29,8 @@ export class Place {
     this._idNotes = idNotes;
     this._visitado = visitado;
     this._via = via;
+    this._latitude = latitude;
+    this._longitude = longitude;
   }
 
   /**
@@ -137,5 +143,37 @@ export class Place {
    */
   public setVia(value: Vias) {
     this._via = value;
+  }
+
+  /**
+   * Getter latitude
+   * @return {number}
+   */
+  public get latitude(): number {
+    return this._latitude;
+  }
+
+  /**
+   * Setter latitude
+   * @param {number} value
+   */
+  public set latitude(value: number) {
+    this._latitude = value;
+  }
+
+  /**
+   * Getter longitude
+   * @return {number}
+   */
+  public get longitude(): number {
+    return this._longitude;
+  }
+
+  /**
+   * Setter longitude
+   * @param {number} value
+   */
+  public set longitude(value: number) {
+    this._longitude = value;
   }
 }

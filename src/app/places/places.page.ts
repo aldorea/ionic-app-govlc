@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlacesService } from './places.service';
+import { PlacesService } from './shared/places.service';
 import { Place } from '../models/places.model';
 
 
@@ -16,7 +16,7 @@ export class PlacesPage implements OnInit {
   constructor(private placeService: PlacesService) {}
 
   ngOnInit() {
- 
+
 }
 
 }

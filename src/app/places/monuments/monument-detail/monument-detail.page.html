@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>monument-detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/places/tabs/monuments"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Monument Detail</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
+<ion-content padding>
+  <ion-button color="primary" margin (click)="setVisitado()">Visitado</ion-button>
 </ion-content>
