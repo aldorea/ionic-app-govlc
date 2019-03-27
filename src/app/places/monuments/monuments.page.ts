@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../places.service';
 import { Place } from 'src/app/models/places.model';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-monuments',
@@ -9,11 +10,16 @@ import { Place } from 'src/app/models/places.model';
 })
 export class MonumentsPage implements OnInit {
   private _monumentsList: Array<Place>;
-  constructor(private placesService: PlacesService) {
+  constructor(private placesService: PlacesService,
+              private _router: Router) {
     this._monumentsList = [];
   }
  
   ngOnInit() {
     this._monumentsList = this.placesService.getPlacesCSV();
+  }
+
+  showDetail(item: Place) {
+    this._router.navigate(['/tabs/monuments/', item.getVia()]);
   }
 }

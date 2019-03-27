@@ -16,6 +16,11 @@ const routes: Routes = [
                   path: '',
                   loadChildren: './monuments/monuments.module#MonumentsPageModule'
                 },
+                {
+                  path: ':via',
+                  loadChildren: './monuments/monument-detail/monument-detail.module#MonumentDetailPageModule'
+                }
+
               ]
           },
           {
