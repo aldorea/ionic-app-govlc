@@ -1,5 +1,7 @@
 {
   "name": "ionic-go-vlc",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

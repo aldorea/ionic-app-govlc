@@ -36,7 +36,7 @@ export class PlacesService {
     return this._place;
   }
 
-  getPlacesCSV() {
+  getPlacesCSV(): Array<Place> {
     let contentCSV = "";
     let csvData = [];
     this._http.get("../../assets/vias.csv", { responseType: "text" }).subscribe(
@@ -64,6 +64,7 @@ export class PlacesService {
       }
     );
     console.log(this._place);
+    return this._place;
   }
 
   matchIds(valueId: string): Vias {
