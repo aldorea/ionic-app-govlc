@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Place } from "../../models/places.model";
 import * as data from "../../../assets/monumentos-turisticos.json";
+import * as utm from 'utm';
 
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -25,32 +26,31 @@ export class PlacesService {
 
   getPlacesJSON(): Array<Place> {
     data.features.forEach(monument => {
+      const coords = utm.toLatLon(...monument.geometry.coordinates, 30, 'U');
       this.place = new Place(
         monument.properties.codvia,
         monument.properties.nombre,
         parseInt(monument.properties.numpol, 10),
-        monument.geometry.coordinates[0],
-        monument.geometry.coordinates[1],
+        coords.latitude,
+        coords.longitude,
         parseInt(monument.properties.telefono, 10),
         parseInt(monument.properties.idnotes, 10),
-       
-
       );
-
+      // utm.toLatLon(coordinates[0], coordinanes[1], 30, 'U');
       this._place.push(this.place);
     });
     return this._place;
   }
 
   getPlacesCSV(): Array<Place> {
-    let contentCSV = "";
+    let contentCSV = '';
     let csvData = [];
-    this._http.get("../../assets/vias.csv", { responseType: "text" }).subscribe(
+    this._http.get('../../assets/vias.csv', { responseType: 'text' }).subscribe(
       result => {
         contentCSV = result;
-        csvData = contentCSV.split("\n");
+        csvData = contentCSV.split('\n');
         csvData.forEach(el => {
-          const delimiter = el.split(";");
+          const delimiter = el.split(';');
           const via = new Vias(
             delimiter[0],
             delimiter[1],

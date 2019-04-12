@@ -27,15 +27,20 @@ const routes: Routes = [
             path: '',
             redirectTo: '/places/tabs/monuments',
             pathMatch: 'full'
-          }
-      ]
-  },
+          },
+          { 
+            path: 'maps',
+            loadChildren: './map/map.module#MapPageModule' 
+          },
+        ]
+      },
+
   {
     path: '',
     redirectTo: '/places/tabs/monuments',
     pathMatch: 'full'
-  },  { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesPageModule' },
-  { path: 'map', loadChildren: './map/map.module#MapPageModule' }
+  }
+
 
 ];
 

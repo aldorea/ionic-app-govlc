@@ -7,7 +7,7 @@ import { Place } from 'src/app/models/places.model.js';
 })
 export class GeoService {
 
-  private coordinates: Array<Place> = [];
+ 
 
   constructor() {
     
