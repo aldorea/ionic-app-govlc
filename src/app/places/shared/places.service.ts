@@ -20,6 +20,7 @@ export class PlacesService {
 
   constructor(private _http: HttpClient) {
     this.getPlacesJSON();
+    this.getPlacesCSV();
   }
 
 
@@ -69,7 +70,7 @@ export class PlacesService {
         console.log(error);
       }
     );
-    console.log(this._place);
+    // console.log(this._place);
     return this._place;
   }
 
@@ -81,5 +82,10 @@ export class PlacesService {
       }
     });
     return value;
+  }
+
+  getMonumentById(id: any): Place {
+    let monument = this._place.find( place => place.getIdVia() === id);
+    return monument;
   }
 }

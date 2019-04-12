@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../../shared/places.service';
+import { ActivatedRoute } from '@angular/router';
+import { Place } from 'src/app/models/places.model';
 
 
 @Component({
@@ -9,12 +11,21 @@ import { PlacesService } from '../../shared/places.service';
 })
 export class MonumentDetailPage implements OnInit {
 
-  private visitado: boolean;
-  constructor(private placeService: PlacesService) {
+monument: Place;
+visitado: boolean;
+
+  constructor(private placeService: PlacesService,
+              private activatedRoute: ActivatedRoute) {
     this.visitado = false;
+
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe( params => {
+      
+      this.monument = this.placeService.getMonumentById(params['id']);
+      console.log(this.monument)
+    });
   }
 
 

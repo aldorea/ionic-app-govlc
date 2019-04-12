@@ -1,6 +1,9 @@
+/// <reference types="@types/googlemaps" />
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PlacesService } from '../shared/places.service';
 import { Place } from 'src/app/models/places.model';
+
 
 
 @Component({

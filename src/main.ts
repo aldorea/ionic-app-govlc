@@ -7,6 +7,9 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
+let api: string;
+
+api = environment.apiKey;
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
