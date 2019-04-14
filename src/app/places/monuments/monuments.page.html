@@ -8,7 +8,7 @@
     <ion-item *ngFor="let place of _monumentsList" 
     [routerLink]="['/', 'places', 'tabs','monuments', place.getIdVia()]"
     detail>
-      <ion-label>
+      <ion-label text-wrap>
         {{place._nombre}}
       </ion-label>
     </ion-item>

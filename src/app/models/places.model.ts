@@ -10,6 +10,7 @@ export class Place {
   private _via: Vias;
   private _latitude: number;
   private _longitude: number;
+  private _fav: boolean;
 
   constructor(
     idVia: string,
@@ -20,7 +21,8 @@ export class Place {
     telefono?: number,
     idNotes?: number,
     visitado?: boolean,
-    via?: Vias
+    via?: Vias,
+    fav?: boolean
   ) {
     this._idVia = idVia;
     this._nombre = nombre;
@@ -31,6 +33,7 @@ export class Place {
     this._via = via;
     this._latitude = latitude;
     this._longitude = longitude;
+    this._fav = fav;
   }
 
   /**
@@ -175,5 +178,13 @@ export class Place {
    */
   public set longitude(value: number) {
     this._longitude = value;
+  }
+
+  public setFav(value: boolean) {
+    this._fav = value;
+  }
+
+  public getFav(): boolean {
+    return this._fav;
   }
 }

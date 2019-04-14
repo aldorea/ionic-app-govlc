@@ -3,6 +3,7 @@ import { PlacesService } from './shared/places.service';
 import { Place } from '../models/places.model';
 
 
+
 @Component({
   selector: 'app-places',
   templateUrl: './places.page.html',

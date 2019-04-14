@@ -10,7 +10,6 @@ import {
 } from './places.page';
 
 
-
 const routes: Routes = [{
     path: 'tabs',
     component: PlacesPage,
@@ -24,7 +23,7 @@ const routes: Routes = [{
             path: ':id',
             loadChildren: './monuments/monument-detail/monument-detail.module#MonumentDetailPageModule'
           }
-
+          
         ]
       },
       {
@@ -36,6 +35,11 @@ const routes: Routes = [{
         path: 'maps',
         loadChildren: './map/map.module#MapPageModule'
       },
+      {
+        path: 'favorites',
+        loadChildren: './favorites/favorites.module#FavoritesPageModule'
+      }
+
     ]
   },
 
@@ -44,8 +48,6 @@ const routes: Routes = [{
     redirectTo: '/places/tabs/monuments',
     pathMatch: 'full'
   }
-
-
 ];
 
 @NgModule({

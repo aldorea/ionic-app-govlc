@@ -13,25 +13,24 @@ import { Place } from 'src/app/models/places.model';
 export class MonumentDetailPage implements OnInit {
 
 monument: Place;
-visitado: boolean;
 phone: string;
+// favorites: Array<Place> = [];
 
   constructor(private placeService: PlacesService,
               private activatedRoute: ActivatedRoute,
-            //  private callNumber: CallNumber 
-            ) {
-
-    this.visitado = false;
-
-  }
+            //  private callNumber: CallNumber
+            ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe( params => {
       this.monument = this.placeService.getMonumentById(params.id);
       this.phone = this.monument.getTelefono().toString();
-      console.log(this.monument);
     });
 
+  }
+  makeFav() {
+    this.monument.setFav(true);
+    this.placeService.addFavorites(this.monument);
   }
 
   // makeCall() {
@@ -44,9 +43,9 @@ phone: string;
   //   }
   // }
 
-
-  // mirar como funciona con params
-  // setVisitado(visit: boolean) {
-  // }
+  makeVisit() {
+    this.monument.setVisitado(true);
+    console.log(this.monument);
+  }
 
 }

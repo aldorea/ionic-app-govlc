@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>favorites</ion-title>
+    <ion-title>Favorites</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let fav of favs" [routerLink]="['/', 'places', 'tabs','monuments', fav.getIdVia()]">
+        <ion-label text-wrap>
+        {{fav._nombre}}
+      </ion-label>
+        <ion-chip>
+           <ion-icon name="trash" (click)="deleteFavorite(fav)"></ion-icon>
+        </ion-chip>  
+    </ion-item> 
+  </ion-list>
 </ion-content>

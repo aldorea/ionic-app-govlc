@@ -7,20 +7,23 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { Vias } from "../../models/vias.model";
-import { TouchSequence } from "selenium-webdriver";
+import { FavoritesPage } from '../favorites/favorites.page';
+
 
 @Injectable({
   providedIn: "root"
 })
 export class PlacesService {
   private place: Place;
-  private via: Vias;
+  // private via: Vias;
   private _place: Array<Place> = [];
   private viasData: Array<Vias> = [];
+  private favs: Array<Place> = [];
 
   constructor(private _http: HttpClient) {
     this.getPlacesJSON();
     this.getPlacesCSV();
+    this.getFavorites();
   }
 
 
@@ -36,6 +39,9 @@ export class PlacesService {
         coords.longitude,
         parseInt(monument.properties.telefono, 10),
         parseInt(monument.properties.idnotes, 10),
+        false,
+        null,
+        false
       );
       // utm.toLatLon(coordinates[0], coordinanes[1], 30, 'U');
       this._place.push(this.place);
@@ -70,7 +76,7 @@ export class PlacesService {
         console.log(error);
       }
     );
-    // console.log(this._place);
+    // giconsole.log(this._place);
     return this._place;
   }
 
@@ -88,4 +94,16 @@ export class PlacesService {
     let monument = this._place.find( place => place.getIdVia() === id);
     return monument;
   }
+
+  addFavorites(monument: Place) {
+      this.favs.push(monument);
+  }
+
+  getFavorites(): Array<Place> {
+    return this.favs;
+  }
+
+ 
+
+  
 }
