@@ -3,17 +3,49 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/places/tabs/monuments"></ion-back-button>
     </ion-buttons>
-    <ion-title>Monument Detail</ion-title>
+    <ion-title>Monument Details</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
   <ion-card>
-    <ion-card-title>Monument</ion-card-title>
-    <ion-card-header>Details</ion-card-header>
+    <ion-card-title>Information</ion-card-title>
+    <!-- <ion-card-header>Details</ion-card-header> -->
     <ion-card-content>
-      
-
+      <ion-list>
+        <ion-item>
+          <ion-label text-wrap>
+            <h3>Name</h3>
+            <p>{{monument.getNombre()}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Address</h3>
+            <p>{{monument.getVia().getCodTipoVia()}} {{monument.getVia().getNomOficial()}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
-  <ion-button color="primary" margin (click)="setVisitado()">Visitado</ion-button>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label text-wrap>
+          <h3>Phone number</h3>
+          <p>{{monument.getTelefono()}}</p>
+        </ion-label>
+        <ion-button>
+            <ion-icon name="call"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+          <ion-button color="primary" slot="start" (click)="setVisitado()">Visitado</ion-button>
+          <ion-button color="primary" slot="end">Fav</ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
