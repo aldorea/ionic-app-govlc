@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { PlacesService } from '../../shared/places.service';
 import { ActivatedRoute } from '@angular/router';
 import { Place } from 'src/app/models/places.model';
@@ -12,18 +12,21 @@ import { ActionSheetController, AlertController } from '@ionic/angular';
   styleUrls: ['./monument-detail.page.scss'],
 })
 export class MonumentDetailPage implements OnInit {
+// favorites: Array<Place> = [];
 
 monument: Place;
- phone: string;
-// favorites: Array<Place> = [];
+phone: string;
+image: string;
+
 
   constructor(private placeService: PlacesService,
               private activatedRoute: ActivatedRoute,
               private callNumber: CallNumber,
-              private camera: Camera,
+              public camera: Camera,
               public actionSheetController: ActionSheetController,
               public alertController: AlertController
             ) {}
+
 
   ngOnInit() {
     this.activatedRoute.params.subscribe( params => {
@@ -50,6 +53,12 @@ monument: Place;
         handler: () => {
           console.log('Call clicked');
           this.makeCall(monument);
+        }
+      }, {
+        text: 'Photo',
+        icon: 'camera',
+        handler: () => {
+          this.getPicture();
         }
       }
       , {
@@ -109,5 +118,24 @@ monument: Place;
     });
     await alert.present();
   }
+
+  getPicture() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      this.image = 'data:image/jpeg;base64,' + imageData;
+     }, (error) => {
+      // Handle error
+      console.error( error );
+     });
+
+  }
+  
 
 }

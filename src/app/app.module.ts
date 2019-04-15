@@ -12,6 +12,7 @@ import { PlacesPageModule } from './places/places.module';
 
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Instagram } from '@ionic-native/instagram/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CallNumber,
-    Camera
+    Camera,
+    Instagram
   ],
   bootstrap: [AppComponent]
 })

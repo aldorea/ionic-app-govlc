@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../shared/places.service';
 import { Place } from 'src/app/models/places.model';
 import { ActionSheetController } from '@ionic/angular';
+import { Instagram } from '@ionic-native/instagram/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-favorites',
@@ -11,9 +13,12 @@ import { ActionSheetController } from '@ionic/angular';
 export class FavoritesPage implements OnInit {
 
   favs: Array<Place> = [];
+  image: string;
 
   constructor(private placesService: PlacesService,
-    public actionSheetController: ActionSheetController) {
+    public actionSheetController: ActionSheetController,
+    public instagram: Instagram,
+    public camera: Camera) {
   }
 
   ngOnInit() {
@@ -34,10 +39,12 @@ export class FavoritesPage implements OnInit {
             this.deleteFavorite(fav);
           }
         },{
-          text: 'Favorite',
-          icon: 'heart',
+          text: 'Share',
+          icon: 'share',
           handler: () => {
             console.log('Favorite clicked');
+            this.getPicture();
+            this.shareImage()
           }
         }, {
           text: 'Cancel',
@@ -58,4 +65,25 @@ export class FavoritesPage implements OnInit {
       this.favs.splice(index, 1);
     }
   }
+
+  getPicture() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      this.image = 'data:image/jpeg;base64,' + imageData;
+     }, (error) => {
+      // Handle error
+      console.error( error );
+     });
+  }
+
+    shareImage() {
+      this.instagram.share(this.image, 'This was copied to my clipboard');
+    }
 }
