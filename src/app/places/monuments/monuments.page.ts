@@ -21,7 +21,7 @@ export class MonumentsPage implements OnInit {
 
   ngOnInit() {
     this._monumentsList = this.placesService.getPlacesCSV();
-
+    console.log(this._monumentsList)
   }
 
   showDetail(item: Place) {

@@ -3,13 +3,15 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/places/tabs/monuments"></ion-back-button>
     </ion-buttons>
-    <ion-title>Monument Details</ion-title>
+    <ion-title>
+      <h2>Monument Details</h2>
+    </ion-title>
+    <ion-icon slot="end" name="more" (click)="onOptionsDetail(monument)"></ion-icon> 
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
   <ion-card>
     <ion-card-title>Information</ion-card-title>
-    <!-- <ion-card-header>Details</ion-card-header> -->
     <ion-card-content>
       <ion-list>
         <ion-item>
@@ -27,15 +29,15 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-  <ion-card>
-    <ion-card-content>
+ <!-- <ion-card>
+     <ion-card-content>
       <ion-item>
         <ion-label text-wrap>
           <h3>Phone number</h3>
           <p *ngIf="monument.getTelefono() === 0; else available">Not available </p>
           <ng-template #available>{{monument.getTelefono()}}</ng-template>
         </ion-label>
-        <ion-button>
+        <ion-button (click)="makeCall(monument.getTelefono())">
             <ion-icon name="call"></ion-icon>
         </ion-button>
       </ion-item>
@@ -48,5 +50,5 @@
           <ion-button color="primary" slot="end"(click)="makeFav()">Fav</ion-button>
       </ion-item>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </ion-content>

@@ -103,7 +103,4 @@ export class PlacesService {
     return this.favs;
   }
 
- 
-
-  
 }
