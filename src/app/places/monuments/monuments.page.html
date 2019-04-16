@@ -4,39 +4,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-searchbar animated="true" [(ngModel)]="text" (ionChange)="filterMonumentsByTxt(text)">
+  <ion-searchbar animated="true" [(ngModel)]="text" (ionChange)="filterMonumentsByTxt(text)"
+  (ionClear)="reloadPlaces()">
   </ion-searchbar>
   <ion-list>
-    <ion-item 
-      [ngIf]="searchMonu.length == 0"  [ngIfElse]="monumenstsFilter"
-      *ngFor="let place of _monumentsList" 
-      [routerLink]="['/', 'places', 'tabs','monuments', place.getIdVia()]" 
-      detail>
+    <ion-item *ngFor="let place of _monumentsList"
+      [routerLink]="['/', 'places', 'tabs','monuments', place.getIdVia()]" detail>
       <ion-label text-wrap>
         {{place._nombre}}
       </ion-label>
     </ion-item>
   </ion-list>
-  <ng-template #monumenstFilter>
-    <ion-list>
-      <ion-item 
-      *ngFor="let place of searchMonu" 
-      [routerLink]="['/', 'places', 'tabs','monuments', place.getIdVia()]"
-      detail>
-    <ion-label>place._nombre</ion-label>
-      </ion-item>
-    </ion-list>
-  </ng-template>
+
 </ion-content>
 
 
-<!-- <ion-list>
-    <ion-item 
-    *ngFor="let place of searchMonu" 
-    [routerLink]="['/', 'places', 'tabs','monuments', place.getIdVia()]"
-      detail>
-      <ion-label text-wrap>
-        {{place._nombre}}
-      </ion-label>
-    </ion-item>
-  </ion-list> -->

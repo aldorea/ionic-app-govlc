@@ -43,8 +43,7 @@ export class FavoritesPage implements OnInit {
           icon: 'share',
           handler: () => {
             console.log('Favorite clicked');
-            this.getPicture();
-            this.shareImage()
+            this.shareImage();
           }
         }, {
           text: 'Cancel',
