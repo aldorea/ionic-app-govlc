@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Place} from '../../models/places.model';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { PlacesService } from '../shared/places.service';
-import { Place } from 'src/app/models/places.model';
 import {  Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
@@ -10,21 +10,31 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./monuments.page.scss']
 })
 export class MonumentsPage implements OnInit {
-  private _monumentsList: Array<Place>;
+  @ViewChild('monumenstsFilter')
+  private monTlp: TemplateRef<any>;
+  private _monumentsList: Array<Place> = [];
+  private searchMonu: Array<Place> = [];
 
-  constructor(private placesService: PlacesService,
-              private _router: Router,
-              ){
 
-    this._monumentsList = [];
+
+  constructor(private placesService: PlacesService) {
+    this._monumentsList = this.placesService.getPlacesCSV();
+   // this.searchMonu;
   }
 
   ngOnInit() {
-    this._monumentsList = this.placesService.getPlacesCSV();
-    console.log(this._monumentsList)
+
+    console.log(this._monumentsList);
+    console.log(this.searchMonu);
+    console.log(this.monTlp);
   }
 
-  showDetail(item: Place) {
-    this._router.navigate(['/tabs/monuments/', JSON.stringify(item)]);
+  filterMonumentsByTxt(text) {
+    console.log(text);
+
+     this.searchMonu = this._monumentsList.filter(monument => {
+      return monument.getNombre().toLowerCase().indexOf(text.toLowerCase()) > -1;
+    });
+    console.log(this.searchMonu);
   }
 }
