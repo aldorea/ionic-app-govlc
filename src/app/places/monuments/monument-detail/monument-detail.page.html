@@ -1,12 +1,12 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/places/tabs/monuments"></ion-back-button>
     </ion-buttons>
     <ion-title>
       <h2>Monument Details</h2>
     </ion-title>
-    <ion-icon slot="end" name="more" (click)="onOptionsDetail(monument)"></ion-icon> 
+    <ion-icon slot="end" name="more" (click)="onOptionsDetail(monument)"></ion-icon>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
@@ -29,8 +29,24 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-  
- <!-- <ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-label>
+        <h3>Photos</h3>
+      </ion-label>
+      <ion-slides class="image-slider" loop="true" slidesPerView="2">
+        <ion-slide *ngFor="let img of images">
+          <img alt="Images" [src]=img class="thumb-img" imageViewer/>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+   
+  </ion-card>
+
+ <!-- <ion-item>
+      <img [src]='image' alt="Foto tomada" *ngIf="image">
+    </ion-item> -->
+  <!-- <ion-card>
      <ion-card-content>
       <ion-item>
         <ion-label text-wrap>

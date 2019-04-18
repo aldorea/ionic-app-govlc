@@ -14,6 +14,8 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Instagram } from '@ionic-native/instagram/ngx';
 
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,7 +23,8 @@ import { Instagram } from '@ionic-native/instagram/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    PlacesPageModule],
+    PlacesPageModule,
+    IonicImageViewerModule],
 
   providers: [
     StatusBar,
