@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../shared/places.service';
 import { Place } from 'src/app/models/places.model';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { Instagram } from '@ionic-native/instagram/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-favorites',
@@ -18,7 +19,9 @@ export class FavoritesPage implements OnInit {
   constructor(private placesService: PlacesService,
     public actionSheetController: ActionSheetController,
     public instagram: Instagram,
-    public camera: Camera) {
+    public camera: Camera,
+    public localNotification: LocalNotifications,
+    public alertController: AlertController ) {
   }
 
   ngOnInit() {
@@ -38,12 +41,19 @@ export class FavoritesPage implements OnInit {
             console.log('Delete clicked');
             this.deleteFavorite(fav);
           }
-        },{
-          text: 'Share',
-          icon: 'share',
+        }, {
+          text: 'Plan a visit',
+          icon: 'alarm',
           handler: () => {
             console.log('Favorite clicked');
-            this.shareImage();
+            // this.shareImage();
+            this.localNotification.schedule({
+              id: 1,
+              title: 'Attention',
+              text: 'You have a meeting',
+              data: { data: 'You planned a vist' },
+              trigger: {at: new Date(new Date().getTime() + 5 * 1000)}
+            });
           }
         }, {
           text: 'Cancel',
@@ -84,5 +94,9 @@ export class FavoritesPage implements OnInit {
 
     shareImage() {
       this.instagram.share(this.image, 'This was copied to my clipboard');
+    }
+
+    makeNotification () {
+      
     }
 }

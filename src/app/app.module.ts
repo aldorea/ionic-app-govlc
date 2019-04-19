@@ -15,6 +15,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Instagram } from '@ionic-native/instagram/ngx';
 
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     IonicModule.forRoot(),
     AppRoutingModule,
     PlacesPageModule,
-    IonicImageViewerModule],
+    IonicImageViewerModule,
+    ],
 
   providers: [
     StatusBar,
@@ -32,7 +34,8 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CallNumber,
     Camera,
-    Instagram
+    Instagram,
+    LocalNotifications
   ],
   bootstrap: [AppComponent]
 })

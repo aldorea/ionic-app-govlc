@@ -44,8 +44,8 @@ images: Array<string> = [];
     this.actionSheetController.create({
       header: 'Options',
       buttons: [{
-        text: 'Visited',
-        icon: 'md-checkmark-circle',
+        text: 'Favorite',
+        icon: 'heart',
         handler: () => {
           console.log('Favorite clicked');
           this.makeFav(monument);
@@ -127,8 +127,8 @@ images: Array<string> = [];
   shareImage() {
     this.instagram.share(this.image, 'Shared from GoVLC!')
     .then(() => {
-        //Not sure photo is shared in
-    })
+        // Not sure photo is shared in
+    });
   }
 
   async presentAlertFav() {
