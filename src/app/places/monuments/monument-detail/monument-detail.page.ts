@@ -134,7 +134,7 @@ images: Array<string> = [];
   async presentAlertFav() {
     const alert = await this.alertController.create({
       header: 'Sorry',
-      message: 'This place is in your favorites places',
+      message: 'This place is in your favorite places',
       buttons: ['OK']
     });
     await alert.present();
