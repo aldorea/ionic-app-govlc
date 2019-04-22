@@ -27,7 +27,7 @@ export class PlacesService {
   }
 
 
-
+  // Reading JSON data
   getPlacesJSON(): Array<Place> {
     data.features.forEach(monument => {
       const coords = utm.toLatLon(...monument.geometry.coordinates, 30, 'U');
@@ -49,6 +49,7 @@ export class PlacesService {
     return this._place;
   }
 
+  // Reading CSV data and matching it with JSON data
   getPlacesCSV(): Array<Place> {
     let contentCSV = '';
     let csvData = [];
@@ -76,10 +77,11 @@ export class PlacesService {
         console.log(error);
       }
     );
-    // giconsole.log(this._place);
+    // console.log(this._place);
     return this._place;
   }
-
+  
+  // Mathcing ids of CSV and JSON data
   matchIds(valueId: string): Vias {
     let value: Vias;
     this.viasData.forEach(via => {
@@ -90,17 +92,19 @@ export class PlacesService {
     return value;
   }
 
+  // Function which returns a monument by id
   getMonumentById(id: any): Place {
     let monument = this._place.find( place => place.getIdVia() === id);
     return monument;
   }
 
+  // Function which adds a monument to a favorite category
   addFavorites(monument: Place) {
       this.favs.push(monument);
   }
 
+  // Function which returns a monument to a favorite category
   getFavorites(): Array<Place> {
     return this.favs;
   }
-
 }

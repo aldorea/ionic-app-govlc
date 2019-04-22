@@ -78,6 +78,7 @@ images: Array<string> = [];
 
   }
 
+  // Function which adds a monument to favorite monuments category
   makeFav(monument: Place) {
     if (!monument.getFav()) {
       monument.setFav(true);
@@ -87,6 +88,7 @@ images: Array<string> = [];
     }
   }
 
+  // Function which makes a call if the phone number is available
   makeCall(monument: Place) {
     if (monument.getTelefono() !== 0) {
       this.callNumber.callNumber(this.phone, true)
@@ -98,12 +100,13 @@ images: Array<string> = [];
     }
 
   }
-
+  // Function which sets to a true value
   makeVisit() {
     this.monument.setVisitado(true);
     console.log(this.monument);
   }
-
+ 
+  // Function which loads a photo of monument to the gallery
   loadPicture() {
     const options: CameraOptions = {
       quality: 100,
@@ -124,6 +127,7 @@ images: Array<string> = [];
 
   }
 
+  // Function which shares the images in the gallery to instagram
   shareImage() {
     this.instagram.share(this.image, 'Shared from GoVLC!')
     .then(() => {
@@ -131,6 +135,8 @@ images: Array<string> = [];
     });
   }
 
+// Function which presents an alert if monument have already added 
+// to the favorite category
   async presentAlertFav() {
     const alert = await this.alertController.create({
       header: 'Sorry',
@@ -140,6 +146,8 @@ images: Array<string> = [];
     await alert.present();
   }
 
+// Function which presents an alert if the phone number is
+// not available
   async presentAlertPhone() {
     const alert = await this.alertController.create({
       header: 'Sorry',

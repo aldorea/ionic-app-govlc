@@ -27,8 +27,8 @@ export class MapPage implements OnInit {
 
   initMap() {
     // console.log(this.markers);
-    let coords = new google.maps.LatLng(39.47, -0.38);
-    let mapOptions: google.maps.MapOptions = {
+    const coords = new google.maps.LatLng(39.47, -0.38);
+    const mapOptions: google.maps.MapOptions = {
       center: coords,
       zoom: 11,
       mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -40,19 +40,21 @@ export class MapPage implements OnInit {
 
     this.markers.forEach(place => {
 
-      const coords = { lat: place.latitude, lng: place.longitude }
+      const coords = { lat: place.latitude, lng: place.longitude };
 
-      let infoWindow = new google.maps.InfoWindow({
+      const infoWindow = new google.maps.InfoWindow({
         content: place.getNombre(),
         position: coords
       });
 
+      // Setting up marker
       marker = new google.maps.Marker({
         map: this.map,
         position: coords,
         title: place.getNombre()
       });
 
+      // Information about the market clicking them
       marker.addListener('click', function() {
         infoWindow.open(this.map, this);
       });

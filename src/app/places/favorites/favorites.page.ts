@@ -29,6 +29,7 @@ export class FavoritesPage implements OnInit {
     console.log(this.favs);
   }
 
+// Multiple actions which an user can do with favorites monuments
   onOptionsFav(fav: Place) {
 
      this.actionSheetController.create({
@@ -68,6 +69,7 @@ export class FavoritesPage implements OnInit {
       });
   }
 
+  // Function which deletes a favorite monument
   deleteFavorite(fav: Place) {
     const index = this.favs.indexOf(fav);
     if (index > -1) {
@@ -75,28 +77,4 @@ export class FavoritesPage implements OnInit {
     }
   }
 
-  getPicture() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    };
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      this.image = 'data:image/jpeg;base64,' + imageData;
-     }, (error) => {
-      // Handle error
-      console.error( error );
-     });
-  }
-
-    shareImage() {
-      this.instagram.share(this.image, 'This was copied to my clipboard');
-    }
-
-    makeNotification () {
-      
-    }
 }
